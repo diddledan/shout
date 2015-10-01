@@ -112,6 +112,21 @@ $(function() {
 			.show();
 	});
 
+	socket.on("profile", function(data) {
+		if (data.error) {
+			$("#profile")
+				.find(".error")
+				.show()
+				.text(data.error)
+				.one(function() {
+					$(this).hide();
+				})
+				.end()
+				.find(".btn")
+				.prop("disabled", false);
+		}
+	})
+
 	socket.on("init", function(data) {
 		if (data.networks.length === 0) {
 			$("#footer").find(".connect").trigger("click");
@@ -727,7 +742,7 @@ $(function() {
 	});
 
 	var windows = $("#windows");
-	var forms = $("#sign-in, #connect");
+	var forms = $("#sign-in, #connect, #profile");
 
 	windows.on("show", "#sign-in", function() {
 		var self = $(this);
@@ -737,6 +752,17 @@ $(function() {
 			if (self.val() === "") {
 				self.focus();
 				return false;
+			}
+		});
+	});
+
+	windows.on("show", "#profile", function() {
+		var self = $(this);
+		var inputs = self.find("input");
+		inputs.each(function() {
+			var self = $(this);
+			if (self.attr("type") === "password") {
+				self.val("");
 			}
 		});
 	});
@@ -754,6 +780,8 @@ $(function() {
 			.end();
 		if (form.closest(".window").attr("id") === "connect") {
 			event = "conn";
+		} else if (form.closest(".window").attr("id") == "profile") {
+			event = "profile"
 		}
 		var values = {};
 		$.each(form.serializeArray(), function(i, obj) {
