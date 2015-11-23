@@ -125,7 +125,7 @@ $(function() {
 				.find(".btn")
 				.prop("disabled", false);
 		}
-	})
+	});
 
 	socket.on("init", function(data) {
 		if (data.networks.length === 0) {
@@ -780,8 +780,8 @@ $(function() {
 			.end();
 		if (form.closest(".window").attr("id") === "connect") {
 			event = "conn";
-		} else if (form.closest(".window").attr("id") == "profile") {
-			event = "profile"
+		} else if (form.closest(".window").attr("id") === "profile") {
+			event = "profile";
 		}
 		var values = {};
 		$.each(form.serializeArray(), function(i, obj) {

@@ -29,17 +29,8 @@ ClientManager.prototype.loadUsers = function() {
 
 ClientManager.prototype.loadUser = function(name) {
 	try {
-<<<<<<< HEAD
-		var json = fs.readFileSync(
-			Helper.HOME + "/users/" + name + ".json",
-			"utf-8"
-		);
-		json = JSON.parse(json);
-	} catch (e) {
-=======
 		var json = this.readUserConfig(name);
-	} catch(e) {
->>>>>>> 2d220ed... front-end-password-change capability
+	} catch (e) {
 		console.log(e);
 		return;
 	}
@@ -137,7 +128,7 @@ ClientManager.prototype.readUserConfig = function(name) {
 	}
 	var path = Helper.HOME + "/users/" + name + ".json";
 	var user = {};
-	data = fs.readFileSync(path, "utf-8");
+	var data = fs.readFileSync(path, "utf-8");
 	user = JSON.parse(data);
 	return user;
 };

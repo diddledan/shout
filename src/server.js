@@ -115,19 +115,19 @@ function init(socket, client, token) {
 				var old = data.old_password;
 				var p1 = data.new_password;
 				var p2 = data.verify_password;
-				if (typeof old === "undefined" || old == "") {
+				if (typeof old === "undefined" || old === "") {
 					socket.emit("profile", {
 						error: "Please enter your current password"
 					});
 					return;
 				}
-				if (typeof p1 === "undefined" || p1 == "") {
+				if (typeof p1 === "undefined" || p1 === "") {
 					socket.emit("profile", {
 						error: "Please enter a new password"
 					});
 					return;
 				}
-				if (p1 != p2) {
+				if (p1 !== p2) {
 					socket.emit("profile", {
 						error: "Both new password fields must match"
 					});
@@ -149,7 +149,7 @@ function init(socket, client, token) {
 				}
 				socket.emit("profile", {
 					error: "Failed to update your password :-("
-				})
+				});
 			}
 		);
 		socket.on(

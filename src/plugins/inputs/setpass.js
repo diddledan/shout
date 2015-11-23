@@ -2,7 +2,7 @@ var bcrypt = require("bcrypt-nodejs");
 var Msg = require("../../models/msg");
 
 module.exports = function(network, chan, cmd, args) {
-	if (cmd != "setpass") {
+	if (cmd !== "setpass") {
 		return;
 	}
 	var client = this;
@@ -10,7 +10,7 @@ module.exports = function(network, chan, cmd, args) {
 		type: Msg.Type.ERROR,
 		text: "You must specify your current password followed by a new password separated by a space."
 	});
-	if (args.length == 2) {
+	if (args.length === 2) {
 		var oldPassword = args[0];
 		var password = args[1];
 		if (!bcrypt.compareSync(oldPassword || "", client.config.password)) {
