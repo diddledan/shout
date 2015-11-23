@@ -112,8 +112,15 @@ function init(socket, client, token) {
 		socket.on(
 			"profile",
 			function(data) {
-				var p1 = data.password;
-				var p2 = data.password2;
+				var old = data.old_password;
+				var p1 = data.new_password;
+				var p2 = data.verify_password;
+				if (typeof old === "undefined" || old == "") {
+					socket.emit("profile", {
+						error: "Please enter your current password"
+					});
+					return;
+				}
 				if (typeof p1 === "undefined" || p1 == "") {
 					socket.emit("profile", {
 						error: "Please enter a new password"
@@ -122,7 +129,13 @@ function init(socket, client, token) {
 				}
 				if (p1 != p2) {
 					socket.emit("profile", {
-						error: "Both password fields must match"
+						error: "Both new password fields must match"
+					});
+					return;
+				}
+				if (!bcrypt.compareSync(old || "", client.config.password)) {
+					socket.emit("profile", {
+						error: "The current password field does not match your account password"
 					});
 					return;
 				}
