@@ -244,6 +244,21 @@ Client.prototype.setPassword = function(hash) {
 	return false;
 };
 
+Client.prototype.setPassword = function(hash) {
+	var client = this;
+	client.manager.updateUser(client.name, {password:hash});
+	// re-read the hash off disk to ensure we use whatever is saved. this will
+	// prevent situations where the password failed to save properly and so
+	// a restart of the server would forget the change and use the old
+	// password again.
+	var user = client.manager.readUserConfig(client.name);
+	if (user.password === hash) {
+		client.config.password = hash;
+		return true;
+	}
+	return false;
+};
+
 Client.prototype.input = function(data) {
 	var client = this;
 	var text = data.text.trim();
