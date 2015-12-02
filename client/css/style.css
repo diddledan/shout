@@ -372,7 +372,8 @@ button, .user {
 	display: none;
 }
 .public #footer .sign-in,
-.public #footer .sign-out {
+.public #footer .sign-out,
+.public #footer .profile {
 	display: none;
 }
 #footer .sign-in {

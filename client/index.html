@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 	<head>
 
@@ -178,28 +178,32 @@
 								<h2>Change password</h2>
 							</div>
 							<div class="col-sm-12">
-								<label class="opt">
-									<input type="password" name="old_password">
-									Enter your current password
-								</label>
+                                <label aria-label="Enter current password">
+                                    <span class="sr-only">Enter current password</span>
+                                </label>
+                                <input class="input" type="password" name="old_password" placeholder="Enter current password">
+                            </div>
+                            <div class="col-sm-12">
+                                <label aria-label="Enter desired new password">
+                                    <span class="sr-only">Enter desired new password</span>
+                                </label>
+                                <input type="password" name="new_password" class="input" placeholder="Enter desired new password">
+                            </div>
+							<div class="col-sm-12">
+                                <label aria-label="Repeat new password">
+                                    <span class="sr-only">Repeat new password</span>
+                                </label>
+                                <input type="password" name="verify_password" class="input" placeholder="Repeat new password">
 							</div>
-							<div class="col-sm-6">
-								<label class="opt">
-									<input type="password" name="new_password">
-									Enter new password
-								</label>
-							</div>
-							<div class="col-sm-6">
-								<label class="opt">
-									<input type="password" name="verify_password">
-									Repeat new password
-								</label>
-							</div>
-							<div class="col-xs-12 error" style="display: none;">
-								Error saving details
+							<div class="alert alert-danger" role="alert" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+								<strong>Oh no!</strong> We couldn't save your password. Carry-on using your old one for now.
 							</div>
 							<div class="col-sm-12">
-								<button type="submit" class="btn">Submit password</button>
+								<button type="submit" class="btn">Change password</button>
 							</div>
 						</div>
 					</form>
