@@ -7,7 +7,7 @@ $(function() {
 		"/devoice",
 		"/disconnect",
 		"/invite",
-		"/join",
+		"/join","/j",
 		"/kick",
 		"/leave",
 		"/mode",
@@ -452,7 +452,7 @@ $(function() {
 			}
 		);
 		if ([
-			"join",
+			"join","j",
 			"mode",
 			"motd",
 			"nick",
@@ -692,7 +692,7 @@ $(function() {
 		}
 
 		var ignore = [
-			"join",
+			"join","j",
 			"part",
 			"quit",
 			"nick",
