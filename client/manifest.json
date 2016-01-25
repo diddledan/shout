@@ -1,0 +1,11 @@
+﻿{
+  "icons": [
+    {
+      "src": "img/logo.svg"
+    }
+  ],
+  "display": "fullscreen",
+  "name": "Shout IRC",
+  "short_name": "Shout",
+  "start_url": "<%- https.enable ? "https" : "http" %>://<%- hostname %>/"
+}
