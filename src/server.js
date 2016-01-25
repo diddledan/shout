@@ -71,11 +71,11 @@ module.exports = function(options) {
 };
 
 function index(req, res, next) {
-	if (req.url.split("?")[0] !== "/") return next();
-	return fs.readFile("client/index.html", "utf-8", function(err, file) {
+	function returnFile(err, file) {
 		var data = _.merge(
 			require("../package.json"),
-			config
+			config,
+			{ hostname: req.headers.host }
 		);
 		res.setHeader("Content-Type", "text/html");
 		res.writeHead(200);
@@ -83,7 +83,19 @@ function index(req, res, next) {
 			file,
 			data
 		));
-	});
+	}
+
+	var reqUrl = req.url.split("?")[0];
+
+	if (reqUrl === "/") {
+		return fs.readFile("client/index.html", "utf-8", returnFile);
+	}
+
+	if (reqUrl === "/manifest.json") {
+		return fs.readFile("client/manifest.json", "utf-8", returnFile);
+	}
+
+	return next();
 }
 
 function init(socket, client, token) {
